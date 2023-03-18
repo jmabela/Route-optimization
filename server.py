@@ -111,7 +111,7 @@ def create_trip():
     title = request.form.get('title')
     month = request.form.get('month')
     year = request.form.get('year')
-    
+    session["title"] = title
     print(session["cities"])
 
     print(title, month, year)
