@@ -30,14 +30,14 @@ for n in range(5):
     user = crud.create_user(fname, lname, email, password)
     model.db.session.add(user)
 
-    for i in range(5):
+    for i in range(2):
         title = choice(['summer', 'fall', 'winter', 'spring'])
         title = f'{title} {i}'
         cities_in_order = f'Lalalan {i}'
         month = choice(months)
         year=choice(years)
         placeid = 'ChIJs1lT0GhiEBMRUH22ZykECwE'
-        trip = crud.create_trip(user, title, cities_in_order, month, year, placeid)
+        trip = crud.create_trip(user, title, cities_in_order, placeid, month, year)
         model.db.session.add(trip)
 
 for j in range(4):
@@ -46,8 +46,6 @@ for j in range(4):
     lat= i+5
     long= i+100
     country =f'Country{j}'
-    continent = choice(['Africa', 'North America', 'South America', 'Asia', 'Europe', 'Oceania'])
-    description = choice(['Beautiful City', 'Colorful town', 'Overcrowded', 'Nice beach town', 'Party town', 'Vibrant city'])
     city= crud.create_city(name, country, placeid, lat, long)
     model.db.session.add(city)
         

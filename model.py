@@ -34,9 +34,10 @@ class Trip(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     title = db.Column(db.String, nullable=True)
     cities_in_order = db.Column(db.String, nullable=True)
+    placeid = db.Column(db.String, nullable=True)
     month = db.Column(db.String, nullable=True)
     year = db.Column(db.Integer, nullable=True)
-    placeid = db.Column(db.String, nullable=True)
+    
     
 
     user = db.relationship('User', back_populates='trip')
@@ -45,7 +46,7 @@ class Trip(db.Model):
 
     def __repr__(self):
 
-        return f"<Trip description={self.title}, cities in this trip={self.cities_in_order} dates={self.month} to {self.year}>"
+        return f"<Trip description={self.title}, cities in this trip={self.cities_in_order}, placesId={self.placeid} dates={self.month} to {self.year}>"
 
     
 class City(db.Model):

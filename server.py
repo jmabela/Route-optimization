@@ -91,9 +91,12 @@ def create_city():
             cities_list.append(city_name)
             place_id_list.append(place_id)
             
+            
 
             city = crud.create_city(city_name, country, place_id, lat, long)
             print('this should be object data: ', city)
+
+        session["placeid_list"] = place_id_list
 
         cities = ', '.join(cities_list)
         placesid = ', '.join(place_id_list)
@@ -108,14 +111,26 @@ def create_city():
 
 @app.route("/createtrip", methods=["POST"])
 def create_trip():
+    email = session["email"]
+    user = crud.get_user_by_email(email) 
     title = request.form.get('title')
     month = request.form.get('month')
     year = request.form.get('year')
-    session["title"] = title
-    print(session["cities"])
 
-    print(title, month, year)
-    return'hello'
+    session["title"] = title
+    trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
+   
+    return render_template('trip.html')
+
+# create another route to get trip id send info to my front end, get method
+@app.route('/gettrip/<trip_id>')
+def get_trip():
+    trip_id = request.view_args['trip_id']
+    trip= crud.get_trip_by_id(trip_id)
+    
+    #request form from route
+
+    return trip
 
     
     
@@ -128,30 +143,6 @@ def routes():
 @app.route("/newtrip")
 def newtrip():
     return render_template('newtrip.html')
-
-
-
-    
-    # fname = request.form.get('fname')
-    # lname = request.form.get('lname')
-    # email = request.form.get('email')
-    # password = request.form.get('password')
-
-    # if fname=='' or lname=='' or email=='' or password=='':
-    #     flash('Please fill out all fields')
-    #     return redirect('/create_user.html')
-    # else:
-    #     crud.create_user(fname, lname, email, password)
-    #     session['fname'] = fname
-    #     session['lname'] = lname
-    #     session['email'] = email
-    #     session['password'] = password
-    #     flash("Account sucessfully created")
-    #     return redirect('/routes.hmtl')
-
-
-
-
 
 
 

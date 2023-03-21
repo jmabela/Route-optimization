@@ -131,6 +131,7 @@ createTripButton.addEventListener('click', (evt)=> {
             //     console.log(status);
             //     console.log(error);
             // },
+            // instead of a post do get 
         });
     
 

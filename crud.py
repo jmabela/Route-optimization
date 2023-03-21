@@ -26,10 +26,10 @@ def get_user_by_email(email):
     
     return User.query.filter(User.email == email).first()
 
-def create_trip(user, title, cities_in_order, month, year, placeid):
+def create_trip(user, title, cities_in_order, placeid, month, year):
     """Create and return a new trip."""
 
-    trip = Trip(user=user, title=title, cities_in_order=cities_in_order, month=month, year=year, placeid=placeid)
+    trip = Trip(user=user, title=title, cities_in_order=cities_in_order, placeid=placeid, month=month, year=year)
     db.session.add(trip)
     db.session.commit()
     
@@ -40,6 +40,10 @@ def return_trips():
 
     return Trip.query.all()
 
+def return_trip_by_id():
+
+    return Trip.query.filter(Trip.trip_id==11).all()
+
 
 def get_trip_by_id(trip_id):
     """Returns trip object when passed a trip id."""
@@ -48,6 +52,7 @@ def get_trip_by_id(trip_id):
 
 def get_trips_by_user(user_id):
     """Returns all trips by User."""
+    
 
     return Trip.query.filter_by(User.user_id==user_id).all()
 
@@ -65,6 +70,7 @@ def create_city(name, country, place_id, lat, long):
     db.session.commit()
 
     return city
+
 def get_city_by_id(city_id):
     """"Returns city object when passed id"""
 
@@ -74,9 +80,7 @@ def get_cities_by_country(country):
 
     return City.query.filter_by(country).all()
 
-def get_cities_by_continent(continent):
 
-    return City.query.filter_by(continent).all()
 
 
 
