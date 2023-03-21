@@ -40,9 +40,15 @@ def return_trips():
 
     return Trip.query.all()
 
-def return_trip_by_id():
+def return_trip_by_id(trip_id):
 
-    return Trip.query.filter(Trip.trip_id==11).all()
+    return (Trip.query.filter(Trip.trip_id==trip_id).all())[0]
+
+####Select placeid from trips where trip_id=i
+
+##Trip.query.filter(Trip.trip_id==11).all()
+# Trip.query(Trip.placeid).filter(Trip.trip_id==5)
+# Trip.placeid.query.filter(Trip.trip==5)
 
 
 def get_trip_by_id(trip_id):

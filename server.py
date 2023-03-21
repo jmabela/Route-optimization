@@ -107,7 +107,7 @@ def create_city():
         print('this should be place list: ', placesid)
        
     
-    return 'idk, nothing i guess'
+    return cities==session["cities"], placesid==session["placesid"]
 
 @app.route("/createtrip", methods=["POST"])
 def create_trip():
@@ -119,6 +119,16 @@ def create_trip():
 
     session["title"] = title
     trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
+
+    trip= crud.get_trip_by_id(11)
+    
+    title1 = trip.title
+    cities = trip.cities_in_order
+    placeid = trip.placeid
+    month1 = trip.month
+    year1 = trip.year
+    print('Aqui', title1, cities, placeid, month1, year1)
+
    
     return render_template('trip.html')
 
@@ -128,9 +138,15 @@ def get_trip():
     trip_id = request.view_args['trip_id']
     trip= crud.get_trip_by_id(trip_id)
     
-    #request form from route
+    title = trip.title
+    cities = trip.cities_in_order
+    placeid = trip.placeid
+    month = trip.month
+    year = trip.year
+    
+    # request form from route
 
-    return trip
+    return title==title, cities==cities, placeid==placeid, month==month, year==year 
 
     
     
@@ -143,6 +159,19 @@ def routes():
 @app.route("/newtrip")
 def newtrip():
     return render_template('newtrip.html')
+
+@app.route('/trips')
+def trips():
+    trips = crud.return_trips()
+
+    return render_template('all_trips.html', trips=trips)
+
+@app.route('/trips/<trip_id>')
+def trip_detail(trip_id):
+
+    trip = crud.get_trip_by_id(trip_id)
+
+    return render_template('trip_details.html', trip=trip)
 
 
 
