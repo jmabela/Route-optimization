@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}All Movies{% endblock %}
+
+{% block body %}
+{% for trip in trips %}
+    
+  <p><a href="/trips/{{trip.trip_id}}">{{ trip.title }}</a></p>
+{% endfor %}
+
+{% endblock %}
