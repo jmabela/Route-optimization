@@ -103,11 +103,9 @@ def create_city():
         
         session["cities"] =cities
         session["placesid"] =placesid
-        print('this should be cities list: ', cities)
-        print('this should be place list: ', placesid)
        
     
-    return cities==session["cities"], placesid==session["placesid"]
+    return 'idk, nothing i guess'
 
 @app.route("/createtrip", methods=["POST"])
 def create_trip():
@@ -120,33 +118,26 @@ def create_trip():
     session["title"] = title
     trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
 
-    trip= crud.get_trip_by_id(11)
-    
-    title1 = trip.title
-    cities = trip.cities_in_order
-    placeid = trip.placeid
-    month1 = trip.month
-    year1 = trip.year
-    print('Aqui', title1, cities, placeid, month1, year1)
+    # trip = crud.get_trip_by_id(trip_id)
 
    
     return render_template('trip.html')
 
 # create another route to get trip id send info to my front end, get method
-@app.route('/gettrip/<trip_id>')
-def get_trip():
-    trip_id = request.view_args['trip_id']
-    trip= crud.get_trip_by_id(trip_id)
+# @app.route('/gettrip/<trip_id>')
+# def get_trip():
+#     trip_id = request.view_args['trip_id']
+#     trip= crud.get_trip_by_id(trip_id)
     
-    title = trip.title
-    cities = trip.cities_in_order
-    placeid = trip.placeid
-    month = trip.month
-    year = trip.year
+#     title = trip.title
+#     cities = trip.cities_in_order
+#     placeid = trip.placeid
+#     month = trip.month
+#     year = trip.year
     
-    # request form from route
+#     # request form from route
 
-    return title==title, cities==cities, placeid==placeid, month==month, year==year 
+#     return title==title, cities==cities, placeid==placeid, month==month, year==year 
 
     
     
@@ -168,6 +159,7 @@ def trips():
 
 @app.route('/trips/<trip_id>')
 def trip_detail(trip_id):
+    #trip_id = request.view_args['trip_id']
 
     trip = crud.get_trip_by_id(trip_id)
 

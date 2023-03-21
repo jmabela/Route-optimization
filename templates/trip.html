@@ -57,7 +57,7 @@ function getRoute() {
     console.log("after remove origin ", placeIdList);
     var destination_id = placeIdList[placeIdList.length-1];
     console.log("before remove dest ", placeIdList);
-    placeIdList.splice(numberOfIds-1, 1);
+    placeIdList.splice(placeIdList.lenght-1, 1);
     console.log("after remove dest ", placeIdList);
     var waypoints_list = [];
     for (place of placeIdList) {

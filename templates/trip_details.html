@@ -22,7 +22,7 @@ body,
 <p>
   {{ trip.month }}, {{trip.year}}
 </p>
-{{trip.placeid}}
+{{trip.cities_in_order}}
 
 <p>
    <div id="map_canvas"></div>
@@ -40,28 +40,28 @@ body,
 <script>
 
 
-var sessionData = {{session|tojson}};
-// console.log(sessionData['placeid_list'])
-
-var placesId = {{trip.placeid}};
-console.log('HERE: ', placesId)
 
 
-let placeIdList = sessionData["placeid_list"];
+var placesId = {{trip.placeid|tojson}};
+
+
+
+const placeIdList = placesId.split(", ")
+
 
 var geocoder;
 var map;
 
 function getRoute() {
-    let numberOfIds = placeIdList.length;
+    
     var origin_id = placeIdList[0];
-    console.log(numberOfIds);
+   
     console.log("before remove origin ", placeIdList);
     placeIdList.splice(0, 1);
     console.log("after remove origin ", placeIdList);
     var destination_id = placeIdList[placeIdList.length-1];
     console.log("before remove dest ", placeIdList);
-    placeIdList.splice(numberOfIds-1, 1);
+    placeIdList.splice(placeIdList.lenght-1-1, 1);
     console.log("after remove dest ", placeIdList);
     var waypoints_list = [];
     for (place of placeIdList) {

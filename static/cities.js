@@ -116,9 +116,9 @@ createTripButton.addEventListener('click', (evt)=> {
     }
         $.ajax({
             type: 'POST',
-            // url: "{{url_for('/createtrip')}}",
+            
             url: '/createcity',
-            // contentType: 'application/json;charset=UTF-8',
+           
             data: JSON.stringify(cityObject),
             contentType: "application/json",
             dataType: 'json',
@@ -127,11 +127,7 @@ createTripButton.addEventListener('click', (evt)=> {
                 console.log(result)
 
             },
-            // error: function(xhr, status, error) {
-            //     console.log(status);
-            //     console.log(error);
-            // },
-            // instead of a post do get 
+           
         });
     
 
