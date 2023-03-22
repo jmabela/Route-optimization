@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
-{% block title %}All Movies{% endblock %}
+{% block title %}All Your Trips{% endblock %}
 
 {% block body %}
+
+<a href="/newtrip">Create new trip</a>
+<a href="/trips">View past trips</a>
+<a href="/citiesvisited">View all cities visited</a>
+<a href="/routes">Home</a>
+<h1>All Your Trips In One Place, {{session['fname']}}</h1>
 {% for trip in trips %}
     
   <p><a href="/trips/{{trip.trip_id}}">{{ trip.title }}</a></p>

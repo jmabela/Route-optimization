@@ -90,9 +90,6 @@ def create_city():
             #add them to session!!!!!
             cities_list.append(city_name)
             place_id_list.append(place_id)
-            
-            
-
             city = crud.create_city(city_name, country, place_id, lat, long)
             print('this should be object data: ', city)
 
@@ -118,30 +115,10 @@ def create_trip():
     session["title"] = title
     trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
 
-    # trip = crud.get_trip_by_id(trip_id)
 
    
     return render_template('trip.html')
 
-# create another route to get trip id send info to my front end, get method
-# @app.route('/gettrip/<trip_id>')
-# def get_trip():
-#     trip_id = request.view_args['trip_id']
-#     trip= crud.get_trip_by_id(trip_id)
-    
-#     title = trip.title
-#     cities = trip.cities_in_order
-#     placeid = trip.placeid
-#     month = trip.month
-#     year = trip.year
-    
-#     # request form from route
-
-#     return title==title, cities==cities, placeid==placeid, month==month, year==year 
-
-    
-    
-    
 
 @app.route("/routes")
 def routes():
@@ -159,7 +136,6 @@ def trips():
 
 @app.route('/trips/<trip_id>')
 def trip_detail(trip_id):
-    #trip_id = request.view_args['trip_id']
 
     trip = crud.get_trip_by_id(trip_id)
 

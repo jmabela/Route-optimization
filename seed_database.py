@@ -36,7 +36,7 @@ for n in range(5):
         cities_in_order = f'Lalalan {i}'
         month = choice(months)
         year=choice(years)
-        placeid = 'ChIJgTwKgJcpQg0RaSKMYcHeNsQ, ChIJAVkDPzdOqEcRcDteW0YgIQQ, ChIJD7fiBh9u5kcRYJSMaMOCCwQ'
+        placeid = 'ChIJgTwKgJcpQg0RaSKMYcHeNsQ, ChIJAVkDPzdOqEcRcDteW0YgIQQ, ChIJD7fiBh9u5kcRYJSMaMOCCwQ, ChIJ53USP0nBhkcRjQ50xhPN_zw'
         trip = crud.create_trip(user, title, cities_in_order, placeid, month, year)
         model.db.session.add(trip)
 

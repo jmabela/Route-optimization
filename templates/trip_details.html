@@ -16,6 +16,13 @@ body,
   padding: 0px
 }
     </style>
+    <a href="/routes">Home</a>
+    <a href="/newtrip">Create new trip</a>
+    <a href="/trips">View past trips</a>
+    <a href="/citiesvisited">View all cities visited</a>
+    <a href="/"> prev</a>
+    <a href="/">next>>></a>
+    
 
 <h1>{{ trip.title }}</h1>
 
@@ -26,15 +33,6 @@ body,
 
 <p>
    <div id="map_canvas"></div>
-<script>
-     // here you can play with query
-     //query ideas killing me
-     //im done
-     //bye
-     //Select places_id from trips where trip_id=trip_id
-
-
-</script>
 
 
 <script>
@@ -53,16 +51,15 @@ var geocoder;
 var map;
 
 function getRoute() {
-    
-    var origin_id = placeIdList[0];
    
-    console.log("before remove origin ", placeIdList);
+    var origin_id = placeIdList[0];
+    
+    
+    
+    var destination_id = placeIdList[0];
     placeIdList.splice(0, 1);
-    console.log("after remove origin ", placeIdList);
-    var destination_id = placeIdList[placeIdList.length-1];
-    console.log("before remove dest ", placeIdList);
-    placeIdList.splice(placeIdList.lenght-1-1, 1);
-    console.log("after remove dest ", placeIdList);
+   
+    
     var waypoints_list = [];
     for (place of placeIdList) {
         let = waypoint = {
@@ -73,10 +70,6 @@ function getRoute() {
         }
         waypoints_list.push(waypoint);
     }
-
-    console.log("origin: ", origin_id);
-    console.log("dest:,", destination_id);
-    console.log("waypoints: ", waypoints_list);
 
 
     var map = new google.maps.Map(
@@ -103,6 +96,7 @@ function getRoute() {
       map: map
     })
     dirDisp.setDirections(result)
+    console.log(result)
     // print out cities from this result thingy!!!!
   });
 

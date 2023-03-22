@@ -1,11 +1,16 @@
 {% extends 'base.html' %}
-{% block title %}ADVENTURE AWAITS... LET'S PLAN A NEW TRIP TOGETHER{% endblock %}
+{% block title %}{% endblock %}
 
 {% block body %}
 
 
+<h1>ADVENTURE AWAITS... LET'S PLAN A NEW TRIP TOGETHER, {{session['fname']}}</h1>
+<a href="/newtrip">Create new trip</a>
+<a href="/trips">View past trips</a>
+<a href="/citiesvisited">View all cities visited</a>
+<a href="/routes">Home</a>
 
-<h2>Create a Trip</h2>
+<h2>Add trip info here! </h2>
   <form action="/createtrip" method="POST">
     <p>
         Trip title: <input type="text" name="title">

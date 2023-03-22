@@ -21,26 +21,22 @@ body,
     
 <body>
 
-<h1>My First Google Map</h1>
+<h1>{{session['fname']}}</h1>
+
+<a href="/newtrip">Create new trip</a>
+<a href="/trips">View past trips</a>
+<a href="/citiesvisited">View all cities visited</a>
+<a href="/routes">Home</a>
 
 
 <div id="map_canvas"></div>
-<script>
-     // here you can play with query
-     //query ideas killing me
-     //im done
-     //bye
-     //Select places_id from trips where trip_id=trip_id
-
-
-</script>
 
 
 <script>
 
 
 var sessionData = {{session|tojson}};
-console.log(sessionData['placeid_list'])
+
 
 
 let placeIdList = sessionData["placeid_list"];
@@ -49,16 +45,19 @@ var geocoder;
 var map;
 
 function getRoute() {
-    let numberOfIds = placeIdList.length;
+    
     var origin_id = placeIdList[0];
-    console.log(numberOfIds);
+   
     console.log("before remove origin ", placeIdList);
+    
+    
+    var destination_id = placeIdList[0];
     placeIdList.splice(0, 1);
     console.log("after remove origin ", placeIdList);
-    var destination_id = placeIdList[placeIdList.length-1];
-    console.log("before remove dest ", placeIdList);
-    placeIdList.splice(placeIdList.lenght-1, 1);
-    console.log("after remove dest ", placeIdList);
+    // var destination_id = placeIdList[placeIdList.length-1];
+    // console.log("before remove dest ", placeIdList);
+    // placeIdList.splice(placeIdList.lenght-1, 1);
+    // console.log("after remove dest ", placeIdList);
     var waypoints_list = [];
     for (place of placeIdList) {
         let = waypoint = {
