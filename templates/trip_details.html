@@ -8,20 +8,23 @@
 html,
 body,
 #map_canvas {
+  
   height: 100%;
   width: 90%;
-  margin: 0px;
-  padding: 0px
+  margin: 50px;
+  padding: 0px;
+  background: #CBD0B9;
+  
 }
 #directions_panel {
     margin: 0;
     padding: 0;
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     width: 200px;
     height: 600px;
-    background: #fff;
+    background: #bb3737;
     border: 1px solid #999;
     border-left: none;
     border-top: none;
@@ -77,7 +80,7 @@ body,
 
 <p>
    <div id="map_canvas"></div>
-   <div class="col" id="directions-panel"></div>
+   <div id="directions-panel"></div>
 
 
 <script>
@@ -144,50 +147,7 @@ function getRoute() {
     })
     
     dirDisp.setDirections(result)
-    console.log(result)
-    
-    const placesIdOrdered =[]
-    for (waypoint in result.geocoded_waypoints){
-      const placeIdOrdered = (result.geocoded_waypoints[waypoint].place_id)
-      // var test_url = "blalbalplaceIdOrderedEndBla"
-      placesIdOrdered.push(placeIdOrdered)
-      var url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=placeIdOrdered&fields=name&key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U"
-      
-      var new_url = url.replace("placeIdOrdered", placeIdOrdered );
-      console.log('this is new_url, ', new_url);
 
-      // fetch(new_url)
-      // .then((response) => response.json())
-      // .then((responseData) => {
-      //   console.log(responseData)
-      // });
-
-      // var axios = require('axios');
-
-      var config = {
-        method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=YOUR_API_KEY',
-        headers: { }
-      };
-
-      axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    
-
-
-
-
-      
-    
-    }
-    console.log('this is the list', placesIdOrdered)
-    // print out cities from this result thingy!!!!
   });
 
 }

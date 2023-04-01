@@ -65,7 +65,7 @@ def login():
         session['lname'] = user.lname
         session['email'] = user.email
         
-        flash(f'You are logged in! {session["fname"]}')
+        # flash(f'You are logged in! {session["fname"]}')
         return redirect('/routes')
 
     else:
