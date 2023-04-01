@@ -40,15 +40,9 @@ def return_trips():
 
     return Trip.query.all()
 
-def return_trip_by_id(trip_id):
+# def return_trip_by_id(trip_id):
 
-    return (Trip.query.filter(Trip.trip_id==trip_id).all())[0]
-
-####Select placeid from trips where trip_id=i
-
-##Trip.query.filter(Trip.trip_id==11).all()
-# Trip.query(Trip.placeid).filter(Trip.trip_id==5)
-# Trip.placeid.query.filter(Trip.trip==5)
+#     return (Trip.query.filter(Trip.trip_id==trip_id).all())[0]
 
 
 def get_trip_by_id(trip_id):
@@ -60,18 +54,15 @@ def get_trips_by_user(user_id):
     """Returns all trips by User."""
     
 
-    return Trip.query.filter_by(User.user_id==user_id).all()
-
-def get_trips_by_year(year):
-    """"Returns all trips by Year."""
+    return Trip.query.filter_by(user_id=user_id).all()
 
 
-    return Trip.query.filter_by(year).all()
 
-def create_city(name, country, place_id, lat, long):
+
+def create_city(user, name, country, place_id, lat, long):
     """Create and return a new city."""
 
-    city = City(name=name, country=country, place_id=place_id, lat=lat, long=long)
+    city = City(user=user, name=name, country=country, place_id=place_id, lat=lat, long=long)
     db.session.add(city)
     db.session.commit()
 
@@ -82,9 +73,13 @@ def get_city_by_id(city_id):
 
     return City.query.get(city_id)
 
-def get_cities_by_country(country):
+def get_cities_by_user(user_id):
+    """Returns all cities by User."""
+    
 
-    return City.query.filter_by(country).all()
+    return City.query.filter_by(user_id=user_id).all()
+
+
 
 
 

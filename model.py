@@ -19,6 +19,7 @@ class User(db.Model):
     email = db.Column(db.String(25), nullable=True, unique = True)
     password = db.Column(db.String, nullable=True)
     trip = db.relationship('Trip', back_populates='user')
+    city = db.relationship('City', back_populates='user')
 
     def __repr__(self):
          
@@ -56,13 +57,15 @@ class City(db.Model):
     __tablename__ = "cities"
 
     city_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.user_id"))
     name = db.Column(db.String, nullable=True)
     place_id = db.Column(db.String, nullable=True)
-    #geolocation = db.Column(db.String, nullable=True)
     lat = db.Column(db.String, nullable=True)
     long = db.Column(db.String, nullable=True)
     country = db.Column(db.String, nullable=True)
-    # continent = db.Column(db.String, nullable=True)
+
+    user = db.relationship('User', back_populates='city')
+    
     
 
 

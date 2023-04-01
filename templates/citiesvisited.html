@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}ROUTES HOME{% endblock %}
+
+{% block body %}
+<!DOCTYPE html>
+<html>
+<style>
+    html,
+body,
+#map-canvas {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+  padding: 0px
+}
+</style>
+hello world!
+
+<div id="map-canvas"></div>
+
+<script>
+    var map;
+var infoWindow;
+var service;
+
+function initialize() {
+  var mapOptions = {
+    zoom: 5,
+    center: new google.maps.LatLng(51.257195, 3.716563)
+  };
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+  infoWindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.getDetails({
+    placeId: 'ChIJs1lT0GhiEBMRUH22ZykECwE'
+  }, function(result, status) {
+    if (status != google.maps.places.PlacesServiceStatus.OK) {
+      alert(status);
+      return;
+    }
+    var marker = new google.maps.Marker({
+      map: map,
+      position: result.geometry.location
+    });
+    console.log(result.photos)
+    var address = result.adr_address;
+    var newAddr = address.split("</span>,");
+    var photos = result.photos
+
+    infoWindow.setContent(newAddr[0] + "<br>" + photos[1] + "<br>" );
+    infoWindow.open(map, marker);
+  });
+
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&callback=initialize"></script>
+
+</html>
+{% endblock %}

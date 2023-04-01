@@ -47,7 +47,7 @@ def create_user():
             session['fname'] = fname
             session['lname'] = lname
             session['email'] = email
-            flash(f'Your account has been created successfully, {session["fname"]}!')
+            # flash(f'Your account has been created successfully, {session["fname"]}!')
             return redirect ('/routes')
             
 
@@ -99,7 +99,7 @@ def create_city():
             #add them to session!!!!!
             cities_list.append(city_name)
             place_id_list.append(place_id)
-            city = crud.create_city(city_name, country, place_id, lat, long)
+            city = crud.create_city(user, city_name, country, place_id, lat, long)
             print('this should be object data: ', city)
 
         session["placeid_list"] = place_id_list
@@ -117,16 +117,6 @@ def create_city():
 
 @app.route("/createtrip", methods=["POST"])
 def create_trip():
-    # email = session["email"]
-    # user = crud.get_user_by_email(email) 
-    # title = request.form.get('title')
-    # month = request.form.get('month')
-    # year = request.form.get('year')
-
-    # session["title"] = title
-    # trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
-
-
    
     return render_template('trip.html')
 
@@ -141,7 +131,9 @@ def newtrip():
 
 @app.route('/trips')
 def trips():
-    trips = crud.return_trips()
+    email = session["email"]
+    user = crud.get_user_by_email(email) 
+    trips = crud.get_trips_by_user(user.user_id)
 
     return render_template('all_trips.html', trips=trips)
 
@@ -158,9 +150,16 @@ def trip_detail(trip_id):
     
     else:
 
-        
-
         return render_template('trip_details.html', trip=trip)
+    
+@app.route('/cities-visited')
+def cities_visited():
+    email = session["email"]
+    user = crud.get_user_by_email(email)
+    cities = crud.get_cities_by_user(user.user_id)
+    flash(cities)
+
+    return render_template('citiesvisited.html', cities=cities)
 
 
 

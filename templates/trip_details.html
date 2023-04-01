@@ -142,6 +142,7 @@ function getRoute() {
     travelMode: google.maps.TravelMode.DRIVING
   }, function(result, status) {
     var dirDisp = new google.maps.DirectionsRenderer({
+      // $Selectors.dirSteps.find('.msg').hide();
       map: map,
       panel: document.getElementById("directions-panel")
     })

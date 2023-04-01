@@ -40,13 +40,21 @@ for n in range(5):
         trip = crud.create_trip(user, title, cities_in_order, placeid, month, year)
         model.db.session.add(trip)
 
-for j in range(4):
-    name= f'Lalala{j}'
-    placeid= f'geolocation {j}'
-    lat= i+5
-    long= i+100
-    country =f'Country{j}'
-    city= crud.create_city(name, country, placeid, lat, long)
-    model.db.session.add(city)
+        name= f'Lalala{i}'
+        placeid= f'geolocation {i}'
+        lat= i+5
+        long= i+100
+        country =f'Country{i}'
+        city= crud.create_city(user, name, country, placeid, lat, long)
+        model.db.session.add(city)
+
+# for j in range(4):
+#     name= f'Lalala{j}'
+#     placeid= f'geolocation {j}'
+#     lat= i+5
+#     long= i+100
+#     country =f'Country{j}'
+#     city= crud.create_city(name, country, placeid, lat, long)
+#     model.db.session.add(city)
         
 model.db.session.commit()   
