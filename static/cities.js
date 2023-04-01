@@ -18,48 +18,21 @@ function addRow(tableID) {
  
     var cell2 = row.insertCell(1);
     cell2.innerHTML = document.querySelector('#cityName').value;
-    // var element2 = document.createElement("input");
-    // element2.type = "text";
-    // element2.name = "cityname";
-    // element2.value = document.querySelector('#cityName').value
-    // cell2.appendChild(element2);
-    // citiesList.push(element2.value);
-    // console.log(citiesList)
 
     var cell3 = row.insertCell(2);
     cell3.innerHTML = document.querySelector('#country').value;
-    // var element3 = document.createElement("input");
-    // element3.type = "text";
-    // element3.name = "country";
-    // element3.value = document.querySelector('#country').value
-    // cell3.appendChild(element3);
-    
  
     var cell4 = row.insertCell(3);
     cell4.innerHTML = document.querySelector('#placeId').value;
-    // var element4 = document.createElement("input");
-    // element4.type = "text";
-    // element4.name = "placeid";
-    // element4.value = document.querySelector('#placeId').value
-    // cell4.appendChild(element4);
-    // placeIdList.push(element4.value);
-    // console.log(placeIdList)
+    cell4.setAttribute('style','display:none')
 
     var cell5 = row.insertCell(4);
     cell5.innerHTML = document.querySelector('#cityLat').value;
-    // var element5 = document.createElement("input");
-    // element5.type = "text";
-    // element5.name = "citylat";
-    // element5.value = document.querySelector('#cityLat').value
-    // cell5.appendChild(element5);
+    cell5.setAttribute('style','display:none')
 
     var cell6 = row.insertCell(5);
     cell6.innerHTML = document.querySelector('#cityLng').value;
-    // var element6 = document.createElement("input");
-    // element6.type = "text";
-    // element6.name = "citylng";
-    // element6.value = document.querySelector('#cityLng').value
-    // cell6.appendChild(element6);
+    cell6.setAttribute('style','display:none')
  
    }
  
@@ -92,8 +65,15 @@ const createTripButton = document.querySelector('#addCities');
 
 createTripButton.addEventListener('click', (evt)=> {
     // evt.preventDefault();
+    var title = document.querySelector('#title').value
+    var month = document.querySelector('#month').value
+    var year = document.querySelector('#year').value
+    console.log(title, month, year)
     var tableBody = document.getElementById("dataTableBody");
     var cityObject = {}
+    cityObject['title']=title
+    cityObject['month']=month
+    cityObject['year']=year
     for (var i = 1, row; row = tableBody.rows[i]; i++) {
         //iterate through rows
         
@@ -114,6 +94,7 @@ createTripButton.addEventListener('click', (evt)=> {
         cityObject[i] = row_object; 
 
     }
+    
         $.ajax({
             type: 'POST',
             
@@ -125,6 +106,7 @@ createTripButton.addEventListener('click', (evt)=> {
             async: false,
             success: function (result) {
                 console.log(result)
+                // window.location.href = '/createtrip'
 
             },
            

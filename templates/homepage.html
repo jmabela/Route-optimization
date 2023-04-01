@@ -2,27 +2,127 @@
 {% block title %}ROUTES HOME{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
 
-  <h2>Navigation</h2>
+<head>
+
  
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
-  <a href='/create_user'>Create an Account</a>
-  
+    <video id="vid" video autobuffer autoplay>
+      <source id="mp4" src="/static/css/images/coverr-lago-di-braies-4640-1080p.mp4" type="video/mp4">
+    </video>
+    <!--Stylesheet-->
+    <style media="screen">
+      *,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-  <h2>Log In</h2>
-  <form action="/login" method="POST">
-    <p>
-      Email <input type="text" name="email">
-    </p>
+form{
+    height: 520px;
+    width: 400px;
+    background-color: rgba(255,255,255,0.13);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
 
-    <p>
-      Password <input type="password" name="password">
-    </p>
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+::placeholder{
+    color: #e5e5e5;
+}
+#logging-button{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-    <p>
-      <input type="submit" value="Log in">
-    </p>
-  </form>
+html, body {
+  width: 100%; 
+  height:100%; 
+  overflow:hidden;
+}
+
+#vid{
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 100%; 
+  min-height: 100%; 
+  width: auto; 
+  height: auto;
+  z-index: -1000; 
+  overflow: hidden;
+}
+      
+    </style>
+</head>
+<body>
+
+    <form action="/login" method="POST" >
+        <h3>Login Here</h3>
+
+        <label for="email">Email</label>
+        <input type="text" name="email">
+
+        <label for="password">Password</label>
+        <input type="password" name="password">
+
+        <input type="submit" id="logging-button" value="Log in">
+        <a href='/create_user'>Create an Account</a>
+        
+       
+    </form>
+</body>
+
+
 
 {% endblock %}

@@ -1,12 +1,45 @@
 {% extends 'base.html' %}
+
+
 {% block title %}All Your Trips{% endblock %}
 
 {% block body %}
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand mb-2 ms-2" href="/routes">Home</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+      <li class="nav-item">
+        <a class="nav-link" href="/newtrip">Create New Trip </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/trips">View Past Trips</a>
+      </li>
+  
+    </ul>
+    <!-- <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-success me-2" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
+
+<a href="/routes">Home</a>
 <a href="/newtrip">Create new trip</a>
 <a href="/trips">View past trips</a>
 <a href="/citiesvisited">View all cities visited</a>
-<a href="/routes">Home</a>
 <h1>All Your Trips In One Place, {{session['fname']}}</h1>
 {% for trip in trips %}
     

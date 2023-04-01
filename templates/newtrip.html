@@ -2,21 +2,51 @@
 {% block title %}{% endblock %}
 
 {% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand mb-2 ms-2" href="/routes">Home</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+      <li class="nav-item">
+        <a class="nav-link" href="/newtrip">Create New Trip </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/trips">View Past Trips</a>
+      </li>
+  
+    </ul>
+    <!-- <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-success me-2" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
 
 
-<h1>ADVENTURE AWAITS... LET'S PLAN A NEW TRIP TOGETHER, {{session['fname']}}</h1>
-<a href="/newtrip">Create new trip</a>
-<a href="/trips">View past trips</a>
-<a href="/citiesvisited">View all cities visited</a>
-<a href="/routes">Home</a>
+<h2>ADVENTURE AWAITS... </h2>
 
-<h2>Add trip info here! </h2>
+<br>
+<h3>LET'S PLAN A NEW TRIP TOGETHER, {{session['fname']}}</h3>
+<br>
+
+<h4>Add trip info here: </h4>
   <form action="/createtrip" method="POST">
     <p>
-        Trip title: <input type="text" name="title">
+        Trip title: <input type="text" name="title" id="title">
       </p>
       <p>
-        Month: <select name="month">
+        Month: <select name="month" name="month" id="month">
             <option value="jan">January</option>
             <option value="feb">February</option>
             <option value="march">March</option>
@@ -33,7 +63,7 @@
         
       </p>
     <p>
-      Year: <select name="year">
+      Year: <select name="year" name="year" id="year">
         <option value="2023">2023</option>
         <option value="2024">2024</option>
         <option value="2025">2025</option>
@@ -47,7 +77,7 @@
    
 
             City: 
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjxvpRP54gUz4CZGxGLF_yxGY-wQ5-lpg&libraries=places"></script>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&libraries=places"></script>
             <script>
 
                 function initialize() {
@@ -78,11 +108,11 @@
         <body>
             <input id="searchTextField" type="text" size="50" placeholder="Enter a city" autocomplete="on" runat="server" />  
             
-            <input type="text" id="cityName" name="cityName" />
-            <input type="text" id="country" name="country" />
-            <input type="text" id="placeId" name="placeId" />
-            <input type="text" id="cityLat" name="cityLat" />
-            <input type="text" id="cityLng" name="cityLng" />
+            <input type="hidden" id="cityName" name="cityName" />
+            <input type="hidden" id="country" name="country" />
+            <input type="hidden" id="placeId" name="placeId" />
+            <input type="hidden" id="cityLat" name="cityLat" />
+            <input type="hidden" id="cityLng" name="cityLng" />
         </body>
         </html>
 
@@ -98,9 +128,9 @@
                     <th></th>
                     <th>City</th>
                     <th>Country</th>
-                    <th>placeId</th>
-                    <th>Latitude</th>
-                    <th>Longitude</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                     <th></th>
                 </tr>
             </thead>
@@ -120,12 +150,12 @@
             </table>
             <br>
             <br>
-            It's okay to change your mind... select cities you no longer want to visit and press delete button!
+            It's okay to change your mind or make mistakes... select cities you no longer want on your trip and press delete button!
             <br>
             <input type="button" id="deleteCity" value="Delete City" onclick="deleteRow('dataTable')"/>
             <br>
             <br>
-            <input type="button" id="addCities" value="Done with Cities"/>
+            <input type="submit" id="addCities" value="I'm ready"/>
         
 
             
@@ -135,9 +165,9 @@
     <br>
     <br>
       
-    <p>
+    <!-- <p>
       <input type="submit" id="createTrip" value="Create Trip">
-    </p>
+    </p> -->
   </form>
   <script language="JavaScript" src="/static/cities.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

@@ -11,8 +11,8 @@
     html,
 body,
 #map_canvas {
-  height: 100%;
-  width: 100%;
+  height: 90%;
+  width: 90%;
   margin: 0px;
   padding: 0px
 }
@@ -21,15 +21,17 @@ body,
     
 <body>
 
-<h1>{{session['fname']}}</h1>
+<h1>Here's your trip, {{session['fname']}}!</h1>
 
+<a href="/routes">Home</a>
 <a href="/newtrip">Create new trip</a>
 <a href="/trips">View past trips</a>
 <a href="/citiesvisited">View all cities visited</a>
-<a href="/routes">Home</a>
+
 
 
 <div id="map_canvas"></div>
+<div id="directions-panel"></div>
 
 
 <script>
@@ -48,16 +50,11 @@ function getRoute() {
     
     var origin_id = placeIdList[0];
    
-    console.log("before remove origin ", placeIdList);
     
     
     var destination_id = placeIdList[0];
     placeIdList.splice(0, 1);
-    console.log("after remove origin ", placeIdList);
-    // var destination_id = placeIdList[placeIdList.length-1];
-    // console.log("before remove dest ", placeIdList);
-    // placeIdList.splice(placeIdList.lenght-1, 1);
-    // console.log("after remove dest ", placeIdList);
+    
     var waypoints_list = [];
     for (place of placeIdList) {
         let = waypoint = {
@@ -69,9 +66,6 @@ function getRoute() {
         waypoints_list.push(waypoint);
     }
 
-    console.log("origin: ", origin_id);
-    console.log("dest:,", destination_id);
-    console.log("waypoints: ", waypoints_list);
 
 
     var map = new google.maps.Map(
@@ -95,10 +89,20 @@ function getRoute() {
     travelMode: google.maps.TravelMode.DRIVING
   }, function(result, status) {
     var dirDisp = new google.maps.DirectionsRenderer({
-      map: map
+      map: map,
+      panel: document.getElementById("directions-panel")
     })
     dirDisp.setDirections(result)
     // print out cities from this result thingy!!!!
+    const placesIdOrdered =[]
+    for (waypoint in result.geocoded_waypoints){
+      const placeIdOrdered = (result.geocoded_waypoints[waypoint].place_id)
+      // const city = https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&placeid=placeIdOrdered
+      // console.log(placeIdOrdered)
+      placesIdOrdered.add(placeIdOrdered)
+      // console.log('this is the list', placesIdOrdered)
+    }
+      
   });
 
 }
@@ -109,7 +113,7 @@ google.maps.event.addDomListener(window, "load", getRoute());
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjxvpRP54gUz4CZGxGLF_yxGY-wQ5-lpg&callback=getRoute"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&callback=getRoute"></script>
 
 </body>
 </html>  

@@ -5,23 +5,90 @@
 {% block body %}
 <style>
    
-
-
-    html,
+html,
 body,
 #map_canvas {
   height: 100%;
-  width: 100%;
+  width: 90%;
   margin: 0px;
   padding: 0px
 }
+#directions_panel {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 600px;
+    background: #fff;
+    border: 1px solid #999;
+    border-left: none;
+    border-top: none;
+    padding: 10px 15px;
+
+}
     </style>
-    <a href="/routes">Home</a>
-    <a href="/newtrip">Create new trip</a>
-    <a href="/trips">View past trips</a>
-    <a href="/citiesvisited">View all cities visited</a>
-    <a href="/"> prev</a>
-    <a href="/">next>>></a>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand mb-2 ms-2" href="/routes">Home</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-bs-toggle="collapse"
+    data-bs-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-2">
+      <li class="nav-item">
+        <a class="nav-link" href="/newtrip">Create New Trip </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/trips">View Past Trips</a>
+      </li>
+      <!-- <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          Dropdown
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href="/trips/{{trip.trip_id-1}}">&#8810Prev</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/trips/{{trip.trip_id+1}}">Next&#8811</a>
+      </li>
+    </ul>
+    <!-- <form class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+      <button class="btn btn-outline-success me-2" type="submit">Search</button>
+    </form> -->
+  </div>
+</nav>
+
+
+
     
 
 <h1>{{ trip.title }}</h1>
@@ -29,10 +96,11 @@ body,
 <p>
   {{ trip.month }}, {{trip.year}}
 </p>
-{{trip.cities_in_order}}
+
 
 <p>
    <div id="map_canvas"></div>
+   <div class="col" id="directions-panel"></div>
 
 
 <script>
@@ -49,6 +117,7 @@ const placeIdList = placesId.split(", ")
 
 var geocoder;
 var map;
+
 
 function getRoute() {
    
@@ -93,10 +162,54 @@ function getRoute() {
     travelMode: google.maps.TravelMode.DRIVING
   }, function(result, status) {
     var dirDisp = new google.maps.DirectionsRenderer({
-      map: map
+      map: map,
+      panel: document.getElementById("directions-panel")
     })
+    
     dirDisp.setDirections(result)
     console.log(result)
+    
+    const placesIdOrdered =[]
+    for (waypoint in result.geocoded_waypoints){
+      const placeIdOrdered = (result.geocoded_waypoints[waypoint].place_id)
+      // var test_url = "blalbalplaceIdOrderedEndBla"
+      placesIdOrdered.push(placeIdOrdered)
+      var url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=placeIdOrdered&fields=name&key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U"
+      
+      var new_url = url.replace("placeIdOrdered", placeIdOrdered );
+      console.log('this is new_url, ', new_url);
+
+      // fetch(new_url)
+      // .then((response) => response.json())
+      // .then((responseData) => {
+      //   console.log(responseData)
+      // });
+
+      // var axios = require('axios');
+
+      var config = {
+        method: 'get',
+        url: 'https://maps.googleapis.com/maps/api/place/details/json?place_id=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name%2Crating%2Cformatted_phone_number&key=YOUR_API_KEY',
+        headers: { }
+      };
+
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    
+
+
+
+
+      
+    
+    }
+    console.log('this is the list', placesIdOrdered)
     // print out cities from this result thingy!!!!
   });
 
@@ -108,7 +221,11 @@ google.maps.event.addDomListener(window, "load", getRoute());
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjxvpRP54gUz4CZGxGLF_yxGY-wQ5-lpg&callback=getRoute"></script>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&callback=getRoute"></script>
+<script src="node_modules/axios/dist/axios.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     
 </p>

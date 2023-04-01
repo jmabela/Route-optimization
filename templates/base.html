@@ -1,15 +1,30 @@
+
 <!doctype html>
 <html lang="eng">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Ubuntu:700">
+   
+ 
+    
+  </head>
+  <body>
+    <!-- content of webpage -->
+
+    <!-- Bootstrap JavaScript Bundle with Popper (a Bootstrap dependency for popovers) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/static/css/styles.css">
+
     <title>
       {% block title %}{% endblock %}
     </title>
 
     {% block head %}{% endblock %}
-  </head>
-  <body>
+  
+  
 
     {% for msg in get_flashed_messages() %}
     <p class="flash-msg">
@@ -21,4 +36,4 @@
 
     {% block after_body %}{% endblock %}
   </body>
-</html>
+</html> 

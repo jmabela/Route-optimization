@@ -36,7 +36,7 @@ def create_user():
 
         if fname=='' or lname=='' or email=='' or password=='':
             flash('Please fill out all fields')
-            return redirect('create_user.html')
+            return redirect('/create_user')
         elif user:
             flash('Account already exists, please log in')
             return redirect("/")
@@ -77,9 +77,18 @@ def login():
 @app.route("/createcity", methods=['GET', 'POST'])
 def create_city():
     
-    if request.method=='POST': 
+    # if request.method=='POST': 
+
+        email = session["email"]
+        user = crud.get_user_by_email(email) 
 
         cities_dict = request.json
+        title = cities_dict["title"]
+        month= cities_dict['month']
+        year= cities_dict['year']
+        
+        del cities_dict["title"], cities_dict["month"], cities_dict["year"]
+        
 
         for key in cities_dict:
             city_name = cities_dict[key]['city']
@@ -100,20 +109,22 @@ def create_city():
         
         session["cities"] =cities
         session["placesid"] =placesid
+
+        trip = crud.create_trip(user, title, cities, placesid, month, year)
        
     
-    return 'idk, nothing i guess'
+        return render_template('trip.html')
 
 @app.route("/createtrip", methods=["POST"])
 def create_trip():
-    email = session["email"]
-    user = crud.get_user_by_email(email) 
-    title = request.form.get('title')
-    month = request.form.get('month')
-    year = request.form.get('year')
+    # email = session["email"]
+    # user = crud.get_user_by_email(email) 
+    # title = request.form.get('title')
+    # month = request.form.get('month')
+    # year = request.form.get('year')
 
-    session["title"] = title
-    trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
+    # session["title"] = title
+    # trip = crud.create_trip(user, title, session["cities"], session["placesid"], month, year)
 
 
    
@@ -138,8 +149,18 @@ def trips():
 def trip_detail(trip_id):
 
     trip = crud.get_trip_by_id(trip_id)
+    print('aquiiiooii', trip)
+    
+    if trip  == None:
+        flash("sorry, you don't have any more trips to show")
 
-    return render_template('trip_details.html', trip=trip)
+        return render_template('pasttrips.html')
+    
+    else:
+
+        
+
+        return render_template('trip_details.html', trip=trip)
 
 
 
