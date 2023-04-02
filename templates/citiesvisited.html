@@ -13,44 +13,74 @@ body,
   margin: 0px;
   padding: 0px
 }
+
+
 </style>
-hello world!
+
+<div class="topnav">  
+</div>
+
+<br>
+
 
 <div id="map-canvas"></div>
 
 <script>
-    var map;
+    var sessionData = {{session|tojson}};
+
+
+
+let placeIdList = sessionData["places_id"];
+
+
+var map;
 var infoWindow;
 var service;
 
 function initialize() {
   var mapOptions = {
-    zoom: 5,
-    center: new google.maps.LatLng(51.257195, 3.716563)
+    zoom: 2,
+    center: new google.maps.LatLng(51.257195, 3.716563),
+    scrollwheel: false,
+    zoomControl: true,
+    panControl: false,
+    streetViewControl: false,
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-  infoWindow = new google.maps.InfoWindow();
+  var infoWindow = new google.maps.InfoWindow();
+  
+for (var placeId in placeIdList){
+    
+    var placeId2= placeIdList[placeId];
+  
+  
   var service = new google.maps.places.PlacesService(map);
   service.getDetails({
-    placeId: 'ChIJs1lT0GhiEBMRUH22ZykECwE'
+    placeId: placeId2
   }, function(result, status) {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
-      alert(status);
+    //   alert(status);
       return;
     }
     var marker = new google.maps.Marker({
       map: map,
       position: result.geometry.location
     });
-    console.log(result.photos)
+
+    marker.addListener('click', () => {
+        infoWindow.close();
+        infoWindow.setContent(result.adr_address);
+        infoWindow.open(map, marker);
+        });
+ 
+    console.log(result.phots)
     var address = result.adr_address;
     var newAddr = address.split("</span>,");
-    var photos = result.photos
-
-    infoWindow.setContent(newAddr[0] + "<br>" + photos[1] + "<br>" );
-    infoWindow.open(map, marker);
+    var photos=result.photos    
+    // infoWindow.setContent(newAddr[0] + "<br>" + photos[1] + "<br>" );
+    // infoWindow.open(map, marker);
   });
+}
 
 }
 

@@ -2,124 +2,177 @@
 {% block title %}{% endblock %}
 
 {% block body %}
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand mb-2 ms-2" href="/routes">Home</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<style>
+    html,
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-2">
-      <li class="nav-item">
-        <a class="nav-link" href="/newtrip">Create New Trip </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/trips">View Past Trips</a>
-      </li>
+@import "compass/css3";
+
+:root{
+  --lightblue: #D7F7FE;
+--darkblue: #1A577F;
+--medblue: #1F729C;
+--salmon: #FF6067;
+--hellayellow: #F7EE1A;
+
+/* //Typography */
+--base-font-size: 16px;
+--base-font-family: 'Nunito', sans-serif;
+--heading-font-family: 'Righteous', sans-serif;
+}
+
+
+
+
+
+body {
+  background: lightblue;
+  font-family: base-font-family;
+  color: #222;
+}
+
+* {
+  transition: all .65s ease;
+  box-sizing: border-box;
   
-    </ul>
-    <!-- <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success me-2" type="submit">Search</button>
-    </form> -->
-  </div>
-</nav>
+}
+
+/* //Centering Content  */
+.container {
+  max-width: 75em;
+  margin: 0 auto;
+}
+
+input[type=text] {
+  width: 90%;
+  padding: 12px 20px;
+  margin: 8px ;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+select {
+  width: 90%;
+  padding: 16px 20px;
+  margin: 8px ;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
 
 
-<h2>ADVENTURE AWAITS... </h2>
 
-<br>
-<h3>LET'S PLAN A NEW TRIP TOGETHER, {{session['fname']}}</h3>
-<br>
+
+</style>
+
+
+
+<div class="topnav">  
+</div>
+
+
+<header class="header">
+  <h2>Adventure Awaits...</h2>
+  <br>
+  <h3>Let's Plan A Trip Together, {{session['fname']}}</h3>
+</header>
+
 
 <h4>Add trip info here: </h4>
-  <form action="/createtrip" method="POST">
-    <p>
-        Trip title: <input type="text" name="title" id="title">
-      </p>
-      <p>
-        Month: <select name="month" name="month" id="month">
-            <option value="jan">January</option>
-            <option value="feb">February</option>
-            <option value="march">March</option>
-            <option value="apr">April</option>
-            <option value="may">May</option>
-            <option value="june">June</option>
-            <option value="jul">July</option>
-            <option value="aug">August</option>
-            <option value="sept">September</option>
-            <option value="oct">October</option>
-            <option value="nov">November</option>
-            <option value="dec">December</option>
-          </select>
-        
-      </p>
-    <p>
-      Year: <select name="year" name="year" id="year">
-        <option value="2023">2023</option>
-        <option value="2024">2024</option>
-        <option value="2025">2025</option>
-        <option value="2026">2026</option>
-        <option value="2027">2027</option>
-        <option value="2028">2028</option>
-        <option value="2029">2029</option>
-        <option value="2030">2030</option>
-      </select>
-    </p>
-   
 
-            City: 
-            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&libraries=places"></script>
-            <script>
-
-                function initialize() {
-                  var input = document.getElementById('searchTextField');
-                  var autocomplete = new google.maps.places.Autocomplete(input);
-                    google.maps.event.addListener(autocomplete, 'place_changed', function () {
-                        var place = autocomplete.getPlace();
-                        document.getElementById('placeId').value= place.place_id;
-                        document.getElementById('cityName').value = place.name;
-                        document.getElementById('cityLat').value = place.geometry.location.lat();
-                        document.getElementById('cityLng').value = place.geometry.location.lng();
-
-                        var form_addres = place.formatted_address
-                        var l = form_addres.split(","); //getting formated_address into an Array to get Country name
-                        var country = l[l.length - 1] //accesing to last item of array, as it's always the country name
-                        
-                        
-                        document.getElementById('country').value = country;
-                        
-                        
-                    });
-                }
-                google.maps.event.addDomListener(window, 'load', initialize);
-                
-            </script>
-       
-       
-        <body>
-            <input id="searchTextField" type="text" size="50" placeholder="Enter a city" autocomplete="on" runat="server" />  
-            
-            <input type="hidden" id="cityName" name="cityName" />
-            <input type="hidden" id="country" name="country" />
-            <input type="hidden" id="placeId" name="placeId" />
-            <input type="hidden" id="cityLat" name="cityLat" />
-            <input type="hidden" id="cityLng" name="cityLng" />
-        </body>
-        </html>
-
-
-        <div id="Citytablediv">
+<div class="row">
+  <div class="column middle">
+    
+      <form action="/createtrip" method="POST" class="main">
+        <p>
+            Trip title:
             <br>
-            <input type="button" id="addCitybutton" value="Add City" onclick="addRow('dataTable')" /><br/><br/>
+            <input size="50" type="text" name="title" id="title">
+          </p>
+          <p>
+            Month: 
+            <br>
+            <select name="month" name="month" id="month">
+                <option value="jan">January</option>
+                <option value="feb">February</option>
+                <option value="march">March</option>
+                <option value="apr">April</option>
+                <option value="may">May</option>
+                <option value="june">June</option>
+                <option value="jul">July</option>
+                <option value="aug">August</option>
+                <option value="sept">September</option>
+                <option value="oct">October</option>
+                <option value="nov">November</option>
+                <option value="dec">December</option>
+              </select>
+            
+          </p>
+        <p>
+          Year: 
+          <br>
+          <select name="year" name="year" id="year">
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>
+            <option value="2028">2028</option>
+            <option value="2029">2029</option>
+            <option value="2030">2030</option>
+          </select>
+        </p>
+       
+    
+                City: 
+                <br>
+                <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&libraries=places"></script>
+                <script>
+    
+                    function initialize() {
+                      var input = document.getElementById('searchTextField');
+                      var autocomplete = new google.maps.places.Autocomplete(input);
+                        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                            var place = autocomplete.getPlace();
+                            document.getElementById('placeId').value= place.place_id;
+                            document.getElementById('cityName').value = place.name;
+                            document.getElementById('cityLat').value = place.geometry.location.lat();
+                            document.getElementById('cityLng').value = place.geometry.location.lng();
+    
+                            var form_addres = place.formatted_address
+                            var l = form_addres.split(","); //getting formated_address into an Array to get Country name
+                            var country = l[l.length - 1] //accesing to last item of array, as it's always the country name
+                            
+                            
+                            document.getElementById('country').value = country;
+                            
+                            
+                        });
+                    }
+                    google.maps.event.addDomListener(window, 'load', initialize);
+                    
+                </script>
+           
+           
+            <body>
+                <input id="searchTextField" type="text" size="50" placeholder="Enter a city" autocomplete="on" runat="server" />  
+                
+                <input type="hidden" id="cityName" name="cityName" />
+                <input type="hidden" id="country" name="country" />
+                <input type="hidden" id="placeId" name="placeId" />
+                <input type="hidden" id="cityLat" name="cityLat" />
+                <input type="hidden" id="cityLng" name="cityLng" />
+                <br>
+                <input class="button-1" type="button" id="addCitybutton" value="Add City" onclick="addRow('dataTable')" /><br/><br/>
+            
+            </body>
+    
+  
+</div>
+
+      
+
+
+        <div id="Citytablediv" class = "column side">
             
 
             <table id="dataTable" width="350px" border="0">
@@ -152,25 +205,25 @@
             <br>
             It's okay to change your mind or make mistakes... select cities you no longer want on your trip and press delete button!
             <br>
-            <input type="button" id="deleteCity" value="Delete City" onclick="deleteRow('dataTable')"/>
+            <input class="button-2" type="button" id="deleteCity" value="Delete City" onclick="deleteRow('dataTable')"/>
             <br>
             <br>
-            <input type="submit" id="addCities" value="I'm ready"/>
+            <input class="button-3" type="submit" id="addCities" value="Show me my trip!"/>
         
 
             
         </div>
+  </div>
 
     <br>
     <br>
     <br>
-      
-    <!-- <p>
-      <input type="submit" id="createTrip" value="Create Trip">
-    </p> -->
+       
   </form>
+
   <script language="JavaScript" src="/static/cities.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  
 
   
 

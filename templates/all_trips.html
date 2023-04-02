@@ -5,42 +5,15 @@
 
 {% block body %}
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand mb-2 ms-2" href="/routes">Home</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-bs-toggle="collapse"
-    data-bs-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="topnav">  
+</div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-2">
-      <li class="nav-item">
-        <a class="nav-link" href="/newtrip">Create New Trip </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/trips">View Past Trips</a>
-      </li>
-  
-    </ul>
-    <!-- <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-      <button class="btn btn-outline-success me-2" type="submit">Search</button>
-    </form> -->
-  </div>
-</nav>
+<header class="header">
+  <h2>All Your Trips In One Place, {{session['fname']}}</h2> 
+</header>
 
-<a href="/routes">Home</a>
-<a href="/newtrip">Create new trip</a>
-<a href="/trips">View past trips</a>
-<a href="/citiesvisited">View all cities visited</a>
-<h1>All Your Trips In One Place, {{session['fname']}}</h1>
+
+
 {% for trip in trips %}
     
   <p><a href="/trips/{{trip.trip_id}}">{{ trip.title }}</a></p>

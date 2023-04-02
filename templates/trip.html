@@ -14,21 +14,19 @@ body,
   height: 90%;
   width: 90%;
   margin: 50px;
-  padding: 0px
+  padding: 0px;
+  background: #CBD0B9;
 }
-    </style>
 
-    
-<body>
+</style>
+<div class="topnav">  
+</div>
 
 <h1>Here's your trip, {{session['fname']}}!</h1>
 
-<a href="/routes">Home</a>
-<a href="/newtrip">Create new trip</a>
-<a href="/trips">View past trips</a>
-<a href="/citiesvisited">View all cities visited</a>
 
 
+<p>Scroll down to see cities in order and directions!</p>
 
 <div id="map_canvas"></div>
 <div id="directions-panel"></div>
@@ -71,7 +69,7 @@ function getRoute() {
     var map = new google.maps.Map(
     document.getElementById("map_canvas"), {
       center: new google.maps.LatLng(53.9191545, 27.602728299999967),
-      zoom: 13,
+      zoom: 2,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
   var directionsService = new google.maps.DirectionsService();

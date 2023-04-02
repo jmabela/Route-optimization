@@ -1,11 +1,8 @@
-{% extends 'base.html' %}
-{% block title %}ROUTES HOME{% endblock %}
 
-{% block body %}
 
 <style>
   body {
-  margin: 100;
+  margin: 0;
   height: 100vh;
   width: 1500px;
   display: grid;
@@ -36,7 +33,7 @@
 }
 
 a {
-  font-family: "Raleway", cursive;
+  font-family: "Raleway";
   font-size: 2.5em;
 }
 
@@ -244,23 +241,22 @@ a {
 
 </style>
 
-<div class="background-one">
-  <div class="link-container">
-    <a class="link-one" href="/newtrip">new trip</a>
+<body>
+  <div class="background-one">
+    <div class="link-container">
+      <a class="link-one" href="/newtrip">new trip</a>
+    </div>
   </div>
-</div>
-<div class="background-two link-container">
-  <a class="link-two" href="/trips">past trips</a>
-</div>
-<div class="background-three link-container">
-  <a class="link-three" href="/cities-visited">cities visited</a>
-</div>
+  <div class="background-two link-container">
+    <a class="link-two" href="/trips">past trips</a>
+  </div>
+  <div class="background-three link-container">
+    <a class="link-three" href="/cities-visited">cities visited</a>
+  </div>
+  
 
-<!-- 
-  <h1>Welcome!</h1>
-  <a href="/newtrip">Create new trip</a>
-  <a href="/trips">View past trips</a>
-  <a href="/citiesvisited">View all cities visited</a> -->
+</body>
 
 
-{% endblock %}
+
+

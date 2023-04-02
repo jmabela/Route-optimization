@@ -141,12 +141,12 @@ def trips():
 def trip_detail(trip_id):
 
     trip = crud.get_trip_by_id(trip_id)
-    print('aquiiiooii', trip)
+
     
     if trip  == None:
-        flash("sorry, you don't have any more trips to show")
+        
 
-        return render_template('pasttrips.html')
+        return redirect('/routes')
     
     else:
 
@@ -157,7 +157,17 @@ def cities_visited():
     email = session["email"]
     user = crud.get_user_by_email(email)
     cities = crud.get_cities_by_user(user.user_id)
-    flash(cities)
+    places_id = []
+    for i in range(len(cities)):
+        place_id = cities[i].place_id
+        places_id.append(place_id)
+
+    places_id_set = set(places_id)
+    places_id = list(places_id_set)
+
+    session["places_id"]=places_id
+   
+    
 
     return render_template('citiesvisited.html', cities=cities)
 
