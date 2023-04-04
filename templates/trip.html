@@ -4,31 +4,59 @@
 {% block body %}
 <!DOCTYPE html>
 <html>
-    <style>
-   
-
-
-    html,
+  <style>
+  html,
 body,
 #map_canvas {
-  height: 90%;
-  width: 90%;
-  margin: 50px;
+  
+  height: 100%;
+  width: 100%;
+  margin: 0px;
   padding: 0px;
-  background: #CBD0B9;
+  font-family: 'Trebuchet MS';
+    color: white;
+  
 }
 
-</style>
+#directions-panel{
+    margin: 0;
+    padding: 0;
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    /* width: 100%;
+    height: 100%; */
+    background: #DEB737;
+    border: 1px solid #999;
+    font-family: 'Trebuchet MS';
+    color: white;
+    border-left: none;
+    border-top: none;
+    padding: 10px 15px;
+
+}
+  </style>
+
 <div class="topnav">  
 </div>
+
+<header class="header">
+  <br>
+  <h2></h2> 
+  <br>
+  <h3></h3>
+</header>
 
 <h1>Here's your trip, {{session['fname']}}!</h1>
 
 
 
-<p>Scroll down to see cities in order and directions!</p>
+Scroll down to see cities in order and directions!
+<br>
 
 <div id="map_canvas"></div>
+<br>
+
 <div id="directions-panel"></div>
 
 

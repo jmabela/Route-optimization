@@ -9,9 +9,7 @@ app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-cities_dict = {}
-cities_list = []
-place_id_list = []
+
 
 @app.route('/')
 def homepage():
@@ -25,6 +23,7 @@ def create_user_form():
 
 @app.route('/user', methods = ['POST'])
 def create_user():
+
 
     # if request.method == 'POST':
         fname = request.form.get('fname')
@@ -78,6 +77,12 @@ def login():
 def create_city():
     
     # if request.method=='POST': 
+        session["placeid_list"] = []
+        session["cities"] =[]
+        session["placesid"] =[]
+        cities_dict = {}
+        cities_list = []
+        place_id_list = []
 
         email = session["email"]
         user = crud.get_user_by_email(email) 
@@ -101,6 +106,7 @@ def create_city():
             place_id_list.append(place_id)
             city = crud.create_city(user, city_name, country, place_id, lat, long)
             print('this should be object data: ', city)
+        
 
         session["placeid_list"] = place_id_list
 
@@ -154,22 +160,26 @@ def trip_detail(trip_id):
     
 @app.route('/cities-visited')
 def cities_visited():
+    session["places_id2"]=[]
     email = session["email"]
     user = crud.get_user_by_email(email)
     cities = crud.get_cities_by_user(user.user_id)
-    places_id = []
+    places_id_set = set()
+    places_id2 = []
     for i in range(len(cities)):
         place_id = cities[i].place_id
-        places_id.append(place_id)
+        places_id2.append(place_id)
 
-    places_id_set = set(places_id)
-    places_id = list(places_id_set)
+    places_id_set = set(places_id2)
+    places_id2 = list(places_id_set)
+    number_cities = len(places_id2)
+    session["numberOfCities"] = number_cities
 
-    session["places_id"]=places_id
+    session["places_id2"]=places_id2
    
     
 
-    return render_template('citiesvisited.html', cities=cities)
+    return render_template('citiesvisited.html')
 
 
 

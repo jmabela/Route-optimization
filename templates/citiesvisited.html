@@ -2,6 +2,7 @@
 {% block title %}ROUTES HOME{% endblock %}
 
 {% block body %}
+
 <!DOCTYPE html>
 <html>
 <style>
@@ -11,7 +12,9 @@ body,
   height: 100%;
   width: 100%;
   margin: 0px;
-  padding: 0px
+  padding: 0px;
+  font-family: 'Trebuchet MS';
+  color: black;
 }
 
 
@@ -22,6 +25,7 @@ body,
 
 <br>
 
+<h2>Hey, {{session["fname"]}} you've visited {{session["numberOfCities"]}} different cities!</h2>
 
 <div id="map-canvas"></div>
 
@@ -30,7 +34,7 @@ body,
 
 
 
-let placeIdList = sessionData["places_id"];
+var placeIdList2 = sessionData["places_id2"];
 
 
 var map;
@@ -47,11 +51,11 @@ function initialize() {
     streetViewControl: false,
   };
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  var infoWindow = new google.maps.InfoWindow();
+  infoWindow = new google.maps.InfoWindow();
   
-for (var placeId in placeIdList){
+for (var placeId in placeIdList2){
     
-    var placeId2= placeIdList[placeId];
+    var placeId2= placeIdList2[placeId];
   
   
   var service = new google.maps.places.PlacesService(map);
@@ -59,7 +63,7 @@ for (var placeId in placeIdList){
     placeId: placeId2
   }, function(result, status) {
     if (status != google.maps.places.PlacesServiceStatus.OK) {
-    //   alert(status);
+      alert(status);
       return;
     }
     var marker = new google.maps.Marker({
@@ -69,14 +73,17 @@ for (var placeId in placeIdList){
 
     marker.addListener('click', () => {
         infoWindow.close();
-        infoWindow.setContent(result.adr_address);
+        var address = result.adr_address;
+        console.log(result.photos[0])
+        infoWindow.setContent(address);
+        // console.log(infoWindow.setContent("not sure if it works"))
         infoWindow.open(map, marker);
         });
  
-    console.log(result.phots)
-    var address = result.adr_address;
-    var newAddr = address.split("</span>,");
-    var photos=result.photos    
+    // console.log(result.phots)
+    // var address = result.adr_address;
+    // var newAddr = address.split("</span>,");
+    // var photos=result.photos    
     // infoWindow.setContent(newAddr[0] + "<br>" + photos[1] + "<br>" );
     // infoWindow.open(map, marker);
   });

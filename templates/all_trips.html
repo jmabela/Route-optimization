@@ -4,19 +4,57 @@
 {% block title %}All Your Trips{% endblock %}
 
 {% block body %}
+<style>
+  .block-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 3.6rem;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    font-size: 1.5rem;
+    line-height: 2.8rem;
+    text-align: center;
+    border:  0px solid;
+}
+
+.button a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    padding: 2.1rem;
+}
+
+.button a:hover, .button a:active { background: rgba(0, 0, 0, 0.1); }
+</style>
 
 <div class="topnav">  
 </div>
 
 <header class="header">
+  <br>
   <h2>All Your Trips In One Place, {{session['fname']}}</h2> 
+  <br>
 </header>
+<br>
+<br>
+<div class="block-intro">
+  {% for trip in trips %}
+  <div class="button">
+    <a href="/trips/{{trip.trip_id}}">{{ trip.title }}</a>
+  </div> 
+  
+  {% endfor %}
+  
+</div>
 
 
 
-{% for trip in trips %}
-    
-  <p><a href="/trips/{{trip.trip_id}}">{{ trip.title }}</a></p>
-{% endfor %}
+
 
 {% endblock %}
