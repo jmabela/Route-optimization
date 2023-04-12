@@ -116,6 +116,7 @@ def create_city():
         session["cities"] =cities
         session["placesid"] =placesid
 
+
         trip = crud.create_trip(user, title, cities, placesid, month, year)
        
     
@@ -158,9 +159,30 @@ def trip_detail(trip_id):
 
         return render_template('trip_details.html', trip=trip)
     
+@app.route("/api/cities")
+def city_info():
+    """JSON information about bears."""
+    email = session["email"]
+    user = crud.get_user_by_email(email)
+    cities_query = crud.get_cities_by_user(user.user_id)
+    cities =[]
+
+    for city in cities_query:
+        cities.append({
+            "name": city.name,
+            "country": city.country,
+            "lat": city.lat,
+            "long": city.long
+        })
+    
+
+    return jsonify(cities)
+
+
+    
 @app.route('/cities-visited')
 def cities_visited():
-    session["places_id2"]=[]
+    session["places_id2"]= []
     email = session["email"]
     user = crud.get_user_by_email(email)
     cities = crud.get_cities_by_user(user.user_id)
@@ -171,11 +193,16 @@ def cities_visited():
         places_id2.append(place_id)
 
     places_id_set = set(places_id2)
+    print("list before becoming set: ", places_id2)
+    print("length: ", len(places_id2))
     places_id2 = list(places_id_set)
     number_cities = len(places_id2)
     session["numberOfCities"] = number_cities
 
     session["places_id2"]=places_id2
+
+    print("AQQUIIIIIIII places_id2: ", places_id2)
+    print ("session: ", session["places_id2"])
    
     
 

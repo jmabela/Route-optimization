@@ -30,18 +30,9 @@ body,
 <div id="map-canvas"></div>
 
 <script>
-    var sessionData = {{session|tojson}};
 
 
-
-var placeIdList2 = sessionData["places_id2"];
-
-
-var map;
-var infoWindow;
-var service;
-
-function initialize() {
+function initMap() {
   var mapOptions = {
     zoom: 2,
     center: new google.maps.LatLng(51.257195, 3.716563),
@@ -50,52 +41,52 @@ function initialize() {
     panControl: false,
     streetViewControl: false,
   };
-  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-  infoWindow = new google.maps.InfoWindow();
+  const map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions)
   
-for (var placeId in placeIdList2){
-    
-    var placeId2= placeIdList2[placeId];
+  const cityInfo = new google.maps.InfoWindow();
+
+  // Retrieving the information with AJAX.
+  //
   
-  
-  var service = new google.maps.places.PlacesService(map);
-  service.getDetails({
-    placeId: placeId2
-  }, function(result, status) {
-    if (status != google.maps.places.PlacesServiceStatus.OK) {
-      alert(status);
-      return;
-    }
-    var marker = new google.maps.Marker({
-      map: map,
-      position: result.geometry.location
+  fetch("/api/cities")
+    .then((response) => response.json())
+    .then((cities) => {
+      console.log(cities)
+      for (const city of cities) { console.log(city)
+        // Define the content of the infoWindow
+        const cityInfoContent = city.name +', '+ city.country;
+      console.log(cityInfoContent)
+      console.log("should be lat: ", city.lat)
+      console.log("should be long: ", city.long)
+
+        const cityMarker = new google.maps.Marker({
+          position: {
+            lat: city.lat*1,
+            lng: city.long*1,
+          },
+          
+          map, // same as saying map: map
+        });
+
+        cityMarker.addListener('click', () => {
+          cityInfo.close();
+          cityInfo.setContent(cityInfoContent);
+          cityInfo.open(map, cityMarker);
+        });
+      }
+    })
+    .catch(() => {
+      alert(`
+      You haven't visited any cities yet!
+    `);
     });
 
-    marker.addListener('click', () => {
-        infoWindow.close();
-        var address = result.adr_address;
-        console.log(result.photos[0])
-        infoWindow.setContent(address);
-        // console.log(infoWindow.setContent("not sure if it works"))
-        infoWindow.open(map, marker);
-        });
  
-    // console.log(result.phots)
-    // var address = result.adr_address;
-    // var newAddr = address.split("</span>,");
-    // var photos=result.photos    
-    // infoWindow.setContent(newAddr[0] + "<br>" + photos[1] + "<br>" );
-    // infoWindow.open(map, marker);
-  });
 }
-
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&callback=initialize"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3&libraries=places&key=AIzaSyCdKUZPbrSErfdmwL33htvJLDk0bcR5-2U&callback=initMap"></script>
 
 </html>
 {% endblock %}

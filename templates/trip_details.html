@@ -49,7 +49,9 @@ body,
 
 
     
-
+<a href="/trips/{{trip.trip_id-1}}">&#8810Prev</a>
+<a href="/trips/{{trip.trip_id+1}}">Next&#8811</a>
+<br>
 <h1>{{ trip.title }}</h1>
 
 <p>
@@ -83,6 +85,8 @@ var placesId = {{trip.placeid|tojson}};
 
 
 const placeIdList = placesId.split(", ")
+
+console.log(placeIdList)
 
 
 var geocoder;
