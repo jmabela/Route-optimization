@@ -47,6 +47,8 @@ Start backend server:
 
 (env) $ python3 server.py
 
+Create a Google Maps Api key.
+
 
 
 ## Authors
