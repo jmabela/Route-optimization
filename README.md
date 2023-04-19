@@ -22,32 +22,32 @@ To have this app running on your local computer, please follow the below steps:
 
 Clone repository:
 
-$ git clone https://github.com/jmabela/Route-optimization.git
+    $ git clone https://github.com/jmabela/Route-optimization.git
 
 Create and activate a virtual environment:
 
-$ pip3 install virtualenv
-$ virtualenv env
-$ source env/bin/activate
+    $ pip3 install virtualenv
+    $ virtualenv env
+    $ source env/bin/activate
 
 Install dependencies:
 
-(env) $ pip3 install -r requirements.txt
+    (env) $ pip3 install -r requirements.txt
 
 Create database routes:
 
-(env) $ createdb routes
+    (env) $ createdb routes
 
 Create database tables:
 
-(env) $ python3 -i model.py
->>> db.create_all()
+    (env) $ python3 -i model.py
+    >>> db.create_all()
 
 Start backend server:
 
-(env) $ python3 server.py
-
-Create a Google Maps Api key.
+    (env) $ python3 server.py
+    
+ Create a Google Maps Api key.
 
 
 
