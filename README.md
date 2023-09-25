@@ -1,6 +1,6 @@
 # Route-optimization
 
-Full stack platform to help users to organize their trip. Users can create their own accounts or log in. It comes with an autocomplete search box to assist users when entering foreign locations. It uses directions services, library places from Google Maps API. The platform makes API calls with Place Id and Lat/Long depending on what the user is requesting. Users need to add their destinations without specific order -- first destination will be start and end point. The app will optimize route and give back the fastest route available for the trip. App renders a map with the optimized route and gives step by step directions of the route. User can save and come back to their previous trips.
+Full stack platform to help users to organize their trip. Users can create their own accounts or log in. It comes with an autocomplete search box to assist users when entering foreign locations. It uses directions services, library places from Google Maps API. The platform makes API calls with Place Id and Lat/Long depending on what the user is requesting. Users need to add their destinations without specific order -- first destination will be start and end point. The app will optimize route and give back the fastest route available for the trip. App renders a map with the optimized route and gives step by step directions of the route. User can save and come back to their previous trips
 
 
 
