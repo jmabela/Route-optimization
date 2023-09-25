@@ -7,7 +7,8 @@ Full stack platform to help users to organize their trip. Users can create their
 ## Demo
 ![2023-09-25 10 39 45](https://github.com/jmabela/Route-optimization/assets/114891957/44b28b8d-4404-4048-9d62-f2f37f786c07)
 
-<img src='./static/css/images/pic3.jpg' />
+<img src='./static/css/images-read-me/2023-09-25 14.03.59.gif'>
+
 
 https://youtu.be/RHj5W62FzbY
 
