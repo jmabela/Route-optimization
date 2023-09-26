@@ -10,15 +10,17 @@ Watch this video for a better understanding of the App:
 
 https://youtu.be/RHj5W62FzbY
 
+Create your account:
+
 ![2023-09-25 10 39 45](https://github.com/jmabela/Route-optimization/assets/114891957/44b28b8d-4404-4048-9d62-f2f37f786c07)
 
+Or log into your account:
+
+![](https://github.com/jmabela/jmabela_public/blob/9d0a54877c5735d0e43ad305b0757f70416d78cd/2023-09-25%2014.03.59.gif)
+
+Plan your route, see previous routes and find out how many cities you've been to:
+
 ![https://github.com/jmabela/jmabela_public.git/main/2023-09-26 10.37.07 2.gif](https://github.com/jmabela/jmabela_public/blob/f5743b58d475dbea7316cb8048d5512ef25028ba/2023-09-26%2010.37.07%202.gif)
-
-
-<img src='./static/css/images-read-me/2023-09-25 14.03.59.gif'>
-
-
-
 
 
 
